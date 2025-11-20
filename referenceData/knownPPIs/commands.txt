@@ -1,0 +1,7 @@
+#!/bin/bash
+#https://www.nature.com/articles/s41586-023-06739-5
+cat "../../../../20250530_Individual IPs/Yeast_interactome_Pooled_lysates_baits.tsv" | cut -f26-29 | sed 's@\r@@' | awk -F '\t'  '{OFS="\t"; if(NR==1)print "Gene_1\tGene_2\tAnnotation_2\tAnnotation_2"; else print $2,$4,$1,$3}' > 2023-Michaelis-YeastPPIs.tsv
+
+
+#Translates to uniprot
+cat 2023-Michaelis-YeastPPIs.tsv | awk -F '\t' 'BEGIN {while(getline <"../geneAnnotations/SGD.yeastID.uniProt.tsv"){gsub(";"," ",$2);split($2,a," "); for(i=1;i<=length(a);i++)v[a[i]]=$3};OFS="\t"} {if(NR==1){print $0} else {split($3,a,";");split($4,b,";");for(ia=1;ia<=length(a);ia++)for(ib=1;ib<=length(b);ib++){ka=a[ia];kb=b[ib];if(!(ka in v)){print "WARNING: "ka" not recognized" > "/dev/stderr"};if(!(kb in v)){print "WARNING: "kb" not recognized" > "/dev/stderr"};print $1,$2,v[ka],v[kb]}}}' > 2023-Michaelis-YeastPPIs.uniprot.tsv

@@ -1,0 +1,22 @@
+{
+    "intensity": ["Gene names", "Protein IDs", "Intensity 1", "Intensity 2","Intensity 3", "Intensity 4", "Intensity 5", "Intensity 6","Intensity 7", "Intensity 8","Intensity 9", "Intensity 10","Intensity 11", "Intensity 12","Intensity 13", "Intensity 14","Intensity 15"],
+    "lfq": ["Gene names", "Protein IDs", "LFQ intensity 1", "LFQ intensity 2","LFQ intensity 3", "LFQ intensity 4", "LFQ intensity 5", "LFQ intensity 6","LFQ intensity 7", "LFQ intensity 8","LFQ intensity 9", "LFQ intensity 10","LFQ intensity 11", "LFQ intensity 12","LFQ intensity 13", "LFQ intensity 14","LFQ intensity 15"],
+    "DIA-intensity": [
+	"PG.Genes",
+	"PG.ProteinGroups",
+	"[1] 20250620_BB_LS_DIA_Pooled_IP_15x30_1.raw.PG.Quantity",
+	"[2] 20250620_BB_LS_DIA_Pooled_IP_15x30_2.raw.PG.Quantity",
+	"[3] 20250620_BB_LS_DIA_Pooled_IP_15x30_3.raw.PG.Quantity",
+	"[4] 20250620_BB_LS_DIA_Pooled_IP_15x30_4.raw.PG.Quantity",
+	"[5] 20250620_BB_LS_DIA_Pooled_IP_15x30_5.raw.PG.Quantity",
+	"[6] 20250620_BB_LS_DIA_Pooled_IP_15x30_6.raw.PG.Quantity",
+	"[7] 20250620_BB_LS_DIA_Pooled_IP_15x30_7.raw.PG.Quantity",
+	"[8] 20250620_BB_LS_DIA_Pooled_IP_15x30_8.raw.PG.Quantity",
+	"[9] 20250620_BB_LS_DIA_Pooled_IP_15x30_9.raw.PG.Quantity",
+	"[10] 20250620_BB_LS_DIA_Pooled_IP_15x30_10.raw.PG.Quantity",
+	"[11] 20250620_BB_LS_DIA_Pooled_IP_15x30_11.raw.PG.Quantity",
+	"[12] 20250620_BB_LS_DIA_Pooled_IP_15x30_12.raw.PG.Quantity",
+	"[13] 20250620_BB_LS_DIA_Pooled_IP_15x30_13.raw.PG.Quantity",
+	"[14] 20250620_BB_LS_DIA_Pooled_IP_15x30_14.raw.PG.Quantity",
+	"[15] 20250620_BB_LS_DIA_Pooled_IP_15x30_15.raw.PG.Quantity"]
+}

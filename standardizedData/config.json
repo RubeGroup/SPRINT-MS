@@ -1,0 +1,4 @@
+{
+    "intensity": ["Gene names", "Protein IDs", "Intensity 1", "Intensity 2","Intensity 3", "Intensity 4", "Intensity 5", "Intensity 6","Intensity 7", "Intensity 8","Intensity 9", "Intensity 10","Intensity 11", "Intensity 12","Intensity 13", "Intensity 14","Intensity 15"],
+    "lfq": ["Gene names", "Protein IDs", "LFQ intensity 1", "LFQ intensity 2","LFQ intensity 3", "LFQ intensity 4", "LFQ intensity 5", "LFQ intensity 6","LFQ intensity 7", "LFQ intensity 8","LFQ intensity 9", "LFQ intensity 10","LFQ intensity 11", "LFQ intensity 12","LFQ intensity 13", "LFQ intensity 14","LFQ intensity 15"]
+}
