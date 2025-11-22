@@ -1,5 +1,5 @@
 # SPRINT-MS
-Repository containing code base for the Pool Solver, Pool Designer and notebooks for recreating results from manuscript.
+Repository containing code base for the Pool Solver, Pool Designer and notebooks for recreating results from [SPRINT-MS manuscript](https://www.biorxiv.org/content/10.1101/2025.11.21.689547v1).
 
 #To make this work, do:
  1. Clone the github repository 'PooledIPMS'
