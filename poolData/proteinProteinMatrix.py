@@ -81,7 +81,6 @@ class proteinProteinMatrix:
                 if(baitProtein.checkMatch(self.intlist.proteinPairList[i][0])):
                     if self.findRowMatches(self.intlist.proteinPairList[i][1]):
                         matched_rows = [t for t in self.findRowMatches(self.intlist.proteinPairList[i][1])]
-                        #matched_proteins = [(baitProtein,self.rowProteins[t[1]]) for t in self.findRowMatches(self.intlist.proteinPairList[i][1])]
                         matched_proteins = self.intlist.proteinPairList[i]
                         plotRows.extend(matched_rows)
                         proteinList.append(matched_proteins)
@@ -89,7 +88,6 @@ class proteinProteinMatrix:
                     if self.findRowMatches(self.intlist.proteinPairList[i][0]):
                         matched_rows = [t for t in self.findRowMatches(self.intlist.proteinPairList[i][0])]
                         matched_proteins = self.intlist.proteinPairList[i]
-                        #matched_proteins = [(baitProtein,self.rowProteins[t[1]]) for t in self.findRowMatches(self.intlist.proteinPairList[i][0])]
                         plotRows.extend(matched_rows)
                         proteinList.append(matched_proteins)
                 else:
@@ -125,7 +123,7 @@ class proteinProteinMatrix:
                     diagonalPairs.extend([(i,col+numberIntercepts) for i in [i] for col in bait])
 
 
-        output = self.matrix[plotRows,:] #np.stack(matrixPlot, axis=0)
+        output = self.matrix[plotRows,:] 
         
         
         for i in range(numberIntercepts):
@@ -145,7 +143,6 @@ class proteinProteinMatrix:
             if(localRows and localCols):
                 to_annotate = [(row,col) for row in localRows for col in localCols]
                 rowcollist.extend(to_annotate)
-        #rowcollist.extend(diagonalPairs)
         rowColList = set(rowcollist)
         
       
@@ -222,7 +219,6 @@ class proteinProteinMatrix:
             newSigMatrix = np.insert(newSigMatrix, missingBaits[i][0], np.nan*np.ones(len(self.columnProteins)), axis=0)
             newRowProteins.insert(missingBaits[i][0], missingBaits[i][1])
         return proteinProteinMatrix(newMatrix, newRowProteins, self.columnProteins, self.intlist, sigMatrix=newSigMatrix)
-        #np.nan*np.ones(len(self.columnProteins))
         
 
     
@@ -280,7 +276,7 @@ class proteinProteinMatrix:
                 
                 #if we want special plot with three matrices side-by-side
                 if(specialOrientation):
-                    f, ((aMix, aSignal, aBeta)) = plt.subplots(1,3, gridspec_kw={'width_ratios': [nPools, nPools, self.nCols], 'height_ratios': [nMixPlot]}) #, nProt]})
+                    f, ((aMix, aSignal, aBeta)) = plt.subplots(1,3, gridspec_kw={'width_ratios': [nPools, nPools, self.nCols], 'height_ratios': [nMixPlot]}) 
                 else:
                     f, ((aMix, aNone),(aSignal, aBeta)) = plt.subplots(2, 2, gridspec_kw={'width_ratios': [nPools, self.nCols], 'height_ratios': [nMixPlot, nProt]})
                     f.delaxes(aNone)
@@ -330,13 +326,10 @@ class proteinProteinMatrix:
             
     
         f.set_size_inches(f_width*imageScale, f_height*imageScale)
-        #f.savefig("exp.pdf")
         plt.show()
         
        
-        
-        #plt.close()
-        #f.tight_layout()
+    
 
     def plotMixingMatrix(self, ax, specialOrientation, trainingData, mixingIndices=None, nPools=None, nMixPlot=None ):
         aMix = ax
@@ -414,7 +407,6 @@ class proteinProteinMatrix:
         if preyNames is None:
             ax.get_yaxis().set_visible(False)
         else:
-        #if plotSignal is False:
             ax.set_yticks(np.arange(nProt))
             ax.set_yticklabels(preyNames, rotation=0, ha='right', fontsize=12)
             

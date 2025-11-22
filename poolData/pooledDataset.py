@@ -66,7 +66,6 @@ class pooledDataset:
         self.nIntercepts = self.intercept.shape[1]
         self.interceptColumns = tuple(range(self.nIntercepts))
         
-        #self.interceptCols= range(intercept.shape[])
     
     
     def buildInterceptMatrix(self, newSignalMatrix=None):
@@ -123,7 +122,6 @@ class pooledDataset:
         (abProteins, mixingMatrix)   = pooledDataset.readMixingMatrix(mixingMatrixPath)
         (preyProteins, signalMatrix) = pooledDataset.readSignalMatrix(signalMatrixPath)
         
-        #intercept = pooledDataset.buildInterceptMatrix(interceptOption, customIntercept, mixingMatrix, signalMatrix)
                     
         return pooledDataset(mixingMatrix, signalMatrix, abProteins, preyProteins, None, None, interceptOption, customIntercept = customIntercept)
 
@@ -182,14 +180,6 @@ class pooledDataset:
     def getDesignMatrix(self):
         return np.concatenate((self.intercept,self.mixingMatrix/np.max(self.mixingMatrix)), axis=1)
 
-        
-    
-    def plotABPoolAverages(self):
-        pass
-
-     
-    def plotSignalMatrix(self):
-        pass
     
     
     def computeRankedValue(self, n, type="mean"): # [“mean” or “value”]):
@@ -292,7 +282,7 @@ class pooledDataset:
     def computePoolNomalizationVector_L2(self, r2cutoff=0.8, maxPreys=20, verbose=False):
         
         #STEP 1 - For each AB/bait, identify the preys with correlation with r^2 above cuttoff (ordered by correlation), giving a dictionary
-        #highCorrelators = {0: [531, 122], 1: [256]}
+       
         highCorrelators = {}
         for i in range(len(self.abProteins)):
             for j in range(len(self.preyProteins)):
@@ -310,7 +300,7 @@ class pooledDataset:
             print("    Number of correlated proteins: %s"%(",".join(["%d"%len(highCorrelators[key]) for key in highCorrelators])))
         
         #STEP 3 - Create a dictionary indicating what columns of the design matrix should be used for each included prey
-        #inputPredictors = {513: [0,1], 122:[0,1], 256:[0,2]}
+        
         inputPredictors = {}
         for baitIndex, preyIndices in highCorrelators.items():
             for item in preyIndices:
@@ -325,7 +315,6 @@ class pooledDataset:
 
         #for key,value in inputPredictors.items():
         for key,cols in inputPredictors.items():
-            #cols = (0,) + value
             Xtemp = dm[:,cols]
             y = self.signalMatrix[key,:]
             P_par = np.dot(Xtemp,np.dot(np.linalg.inv(np.dot(np.transpose(Xtemp),Xtemp)), np.transpose(Xtemp)))
@@ -341,26 +330,24 @@ class pooledDataset:
             return gamma_vec
         else:
             raise Exception("Negative entries in eigenvector")
-        #return eigenvectors[:,np.argmin(eigenvalues)]
         
       
     def normalizePools_L2(self, stoppingCriteria, r2cutoff=0.8, maxPreys=20, verbose=False, rankType="mean", rankN=3):
         dm = self.getDesignMatrix()
         nPools = dm.shape[0]
         #Step 1: Initialize trivial normalization vector
-        #curr_norm = np.ones(nPools)
+    
         curr_norm = np.ones(nPools)
        
         #Step 2: Loop:
             #Step 2a - Create a new datset (temporary) using curr_norm
             #Step 2b - Run computePoolNomalizationVector_L2 and multiply normalizationVector by the output.
             #Step 3c - Terminate after a set number of iterations, or when teh change is small
-       #while((np.linalg.norm(curr_norm,1)-1 ) > stoppingCriteria):
         if verbose:
            print("> normalizePools_L2:")
         for i in range(20):
             
-            #gamma     = #apply rescaling to original raw signal matrix 
+            #apply rescaling to original raw signal matrix 
             gamma = self.rescalePools(curr_norm).normalizeByRankedValue(rankN, type=rankType).computePoolNomalizationVector_L2(r2cutoff, maxPreys, verbose=verbose)
             curr_norm = curr_norm * gamma 
             diffSquareNorm = np.sum((gamma-1)**2)
@@ -372,11 +359,7 @@ class pooledDataset:
             if diffSquareNorm < stoppingCriteria:
                 break
                 
-            #self.rescalePools(curr_norm)
-            #temp = np.array(curr_norm).reshape(1,-1)
 
-            #self.signalMatrix = self.signalMatrix * temp
-            #norm = np.linalg.norm(curr_norm,1)
 
         if verbose:
             print("  Final Rescaling: %s"%",".join(["%.3f"%vi for vi in curr_norm]))
@@ -429,7 +412,7 @@ class pooledDataset:
             
         return self.filterDataset(rowsKeep)
 
-    def filerForBaits(self, verbose=False):
+    def filterForBaits(self, verbose=False):
         """Filters the dataset to only keep rows corresponding to the baits."""
         rowsKeep = []
         for ab in self.abProteins:
@@ -466,12 +449,9 @@ class pooledDataset:
         newPreys = self.preyProteins.copy()
         for i in range(len(missingBaits)):
             newSignal = np.insert(newSignal, missingBaits[i][0], np.nan*np.ones(self.nPools), axis=0)
-            #self.nBaits+=1
-            #self.sigMatrix = np.insert(self.sigMatrix, missingBaits[i][0], np.nan*np.ones(len(self.columnProteins)), axis=0)
             newPreys.insert(missingBaits[i][0], missingBaits[i][1])
         return pooledDataset(self.mixingMatrix, newSignal, self.abProteins, newPreys, self.intercept, self.interceptNames, self.interceptOption, customIntercept=self.customIntercep)
-        #np.nan*np.ones(len(self.columnProteins))
-
+   
         
                                   
     ######################################
@@ -484,7 +464,7 @@ class pooledDataset:
         # on a log scale - this would be used to adjust the threshold.
         preyList =   self.computeRankedValue(n,type)
         modList = [val for val in preyList if val !=0]
-        plt.hist(np.log10(modList), bins=10) #, bins=np.logspace(np.log10(min(preyList)), np.log10(max(preyList)), 10), log=False)
+        plt.hist(np.log10(modList), bins=10)
         plt.xlabel("Value")
         plt.ylabel("Frequency")
         plt.show()
@@ -507,7 +487,7 @@ class pooledDataset:
             B[:,i] = self.mixingMatrix[:,i]/np.average(self.mixingMatrix, axis=1)
 
         n_cols = 3
-        n_rows = int(np.ceil(1.*len(baitsToPlot)/n_cols)) #int(np.ceil(1.*len(self.abProteins)/n_cols))
+        n_rows = int(np.ceil(1.*len(baitsToPlot)/n_cols)) 
 
         #extract bait entries from signal matrix (normalized)
         fig, axes = plt.subplots(n_rows, n_cols, sharex=True, sharey=True) 
@@ -528,24 +508,20 @@ class pooledDataset:
                     ax.text(0.05, 0.95, f'r = {corr_coef:.2f}', transform=ax.transAxes, verticalalignment='top', horizontalalignment='left', fontsize=10, bbox=dict(facecolor='white', alpha=0.0, edgecolor='none'))
                 ax.set_title(baitsToPlot[i].gene_symbol, fontsize=11)
                 ax.tick_params(labelsize=7)
-                #ax.grid(True)
                 if row == n_rows - 1:
                     ax.set_xlabel('Pool', fontsize=8)
                 if col == 0:
                     ax.set_ylabel('Normalized MS intensity', fontsize=6)
 
             else:
-                #print("Not plotting %s"%baitsToPlot[i].gene_symbol)
                 #Removes unused axes.
                 fig.delaxes(ax)
 
-        #fig.tight_layout()
-        (f_height, f_width) = (n_rows, n_cols) #self.nCols+nPools+xPad)
+        (f_height, f_width) = (n_rows, n_cols) 
         fig.set_size_inches(f_width*6, f_height*3)
         fig.legend(['Pool Signal of the Bait Protein', 'Pool-wise Ab Mixing Profile'], loc='lower center', ncol=2)
     
         plt.show()
-        #fig.savefig("baitmixing.pdf")        
         
         
     def plotMixingAndSignalLines(self):
