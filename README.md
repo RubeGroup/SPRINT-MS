@@ -21,12 +21,12 @@ For example to make a conda environment to run SPRINT-MS:
 
 # Data included:
 
-- `rawData` -  `20250404_PooledIP_15x30/` contains mixing scheme and output data from pooled antibody experiments
+- `rawData/` -  `20250404_PooledIP_15x30/` contains mixing scheme and output data from pooled antibody experiments
 and `20250512_Pooled_Lysate_IPs/` contains mixing scheme and output data from pooled lysate experiments. 
-- `standardizedData` - contains data in a standard form, used as input for code in `poolData/` and `poolSolver/`.
+- `standardizedData/` - contains data in a standard form, used as input for code in `poolData/` and `poolSolver/`.
 `20250404_PooledIP_15x30/` for the Ab experiments and `20250512_Pooled_Lysate_IPs/` for lysate experiments, and 
 and `README` for generating this standardized data.
-- `referenceData`- contains PPI data from various literature sources 
+- `referenceData/`- contains PPI data from various literature sources 
  `20250813_human_literature_interactions_UniProtIDs.tsv` for pooled AB experiments and 
  `20250813_yeast_literature_interactions_UniProtIDs.tsv` for pooled lysate experiments.
 
@@ -46,9 +46,9 @@ The following jupyter notebooks include some examples to run the platform:
 
 - `Simulated_Experiment` - code for generating figure 1 and supplementary figure 2 in manuscript, 
 which illustrate outputs from simulated experiments.
-- `AB pooling experiment` - code for generating figure 2 in manuscript, showing data from pooled Ab experiments.
-- `Lysate experiments` - code for generating figure 3 in manuscript, showing data from pooled lysate experiments.
-- `Pool Designer` - code for generating mixing matrices with different pools and antibodies
+- `Pooled_Ab_Experiments` - code for generating figure 2 in manuscript, showing data from pooled Ab experiments.
+- `Pooled_Lysate_Experiments` - code for generating figure 3 in manuscript, showing data from pooled lysate experiments.
+- `Pool_Designer` - code for generating mixing matrices with different pools and antibodies
 
 
  
