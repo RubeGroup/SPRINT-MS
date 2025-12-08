@@ -5,7 +5,7 @@ from scipy.optimize import fmin_cobyla, minimize
 
 from poolData.protein import protein
 from poolData.proteinProteinMatrix import proteinProteinMatrix
-from poolSolver.poolSolver import proteinSolver
+from poolSolver.parallelProteinSolver import proteinSolver
 
 
 class leastSquaresSolver(proteinSolver):

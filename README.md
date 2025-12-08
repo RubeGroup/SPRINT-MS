@@ -14,9 +14,9 @@ This repository contains code for simulating dataset and for processing data fro
 
 For example to make a conda environment to run SPRINT-MS:
 
-- `conda create --name sprintms` - this creates conda environment called sprintms
+- `conda env create -f environment.yml` - this creates conda environment called sprintms and installs required packages
 - `source activate sprintms` - this activates environment
-- `conda install scipy numpy matplotlib scikit-learn` 
+ 
 
 
 # Data included:

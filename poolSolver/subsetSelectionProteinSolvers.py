@@ -1,4 +1,4 @@
-from .poolSolver import proteinSolver, poolSolver
+from .parallelProteinSolver import proteinSolver, poolSolver
 from abc import ABC, abstractmethod
 import numpy as np
 from scipy.optimize import nnls
